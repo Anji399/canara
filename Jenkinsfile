@@ -28,8 +28,8 @@ pipeline {
     stage('Deploy docker-app on host') {
       steps {
         sshagent(['dock']) {
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20 rm -f mp || true'
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20 docker run -d -p 8080:8080 --name mp mvpar/canara:1.0.0'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20 docker run -d -p 8081:8080 --name mpr mvpar/canara:1.0.0'
         }
       }    
     }
