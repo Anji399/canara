@@ -1,4 +1,4 @@
-FROM tomcat:8.5.75
+FROM ubuntu:22.04
 RUN apt-get -y update && apt-get -y upgrade && \
     apt-get -y install openjdk-11-jdk wget && \
     mkdir /usr/local/tomcat
