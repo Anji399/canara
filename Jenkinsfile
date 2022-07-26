@@ -14,24 +14,24 @@ pipeline {
     }
     stage('Build docker image') {
       steps {
-        sh 'docker build -t mvpar/canara:1.0.0 .'  
+        sh 'docker build -t mvpar/canara:1.0.1 .'  
       }    
     }
     stage('Push docker image') {
       steps {
-       withCredentials([string(credentialsId: 'dockpw', variable: 'dockhubpw')]) {
-        sh "docker login -u mvpar -p ${dockhubpw}"
+       withCredentials([string(credentialsId: 'dockerize', variable: 'dockerr')]) {
+        sh "docker login -u mvpar -p ${dockerr}"
        }  
-        sh 'docker push mvpar/canara:1.0.0'
+        sh 'docker push mvpar/canara:1.0.1'
       }    
     }
     stage('Deploy docker-app on host') {
       steps {
-        sshagent(['dock']) {
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20'
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.7.20 docker run -d -p 8081:8080 --name mpr mvpar/canara:1.0.0'
+        sshagent(['sec']) {
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.3.95'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.3.95 docker run -d -p 8081:8080 --name mprppm mvpar/canara:1.0.1'
         }
       }    
     }
-  }    
-}
+  }
+}  
