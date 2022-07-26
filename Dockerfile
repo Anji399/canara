@@ -1,4 +1,4 @@
-FROM ubuntu:latest
+FROM tomcat:8.5.75
 RUN apt-get -y update && apt-get -y upgrade && \
     apt-get -y install openjdk-8-jdk wget && \
     mkdir /usr/local/tomcat
