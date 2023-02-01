@@ -17,6 +17,13 @@ pipeline {
         sh 'docker build -t mvpar/canara:1.0.2 .'  
       }    
     }
+   stage('Push docker image') {
+      steps {
+       withCredentials([string(credentialsId: 'dddd', variable: 'dock')]) {
+        sh "docker login -u mvpar -p ${dock}"
+       }  
+        sh 'docker push mvpar/canara:1.0.2'
+      }    
+    }
   }
-}
-
+}  
