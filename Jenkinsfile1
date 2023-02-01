@@ -25,5 +25,16 @@ pipeline {
         sh 'docker push mvpar/canara:1.0.2'
       }    
     }
+  stage('Deploy docker-app on host') {
+      steps {
+        sshagent(['20054a6b-95ac-4607-bf81-306cd1a1a77b']) {
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.181'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.181 docker run -d -p 8085:8080 --name mprppm mvpar/canara:1.0.2'
+        }
+      }
+    }
   }
 }  
+
+
+  
