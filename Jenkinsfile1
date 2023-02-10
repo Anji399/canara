@@ -32,9 +32,15 @@ pipeline {
          sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.45.181 docker run -d -p 8085:8080 --name mprppm mvpar/canara:1.0.2'
         }
       }
+    }  
+  stage('k8s deploy') {
+      steps {
+          withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', serverUrl: '') {
+          sh 'kubectl apply -f deploy.yml'
+          }
+      }
     }
   }
-}  
-
+}
 
   

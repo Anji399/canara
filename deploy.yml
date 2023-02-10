@@ -1,0 +1,35 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: canara-app
+  name: canara-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: canara-app
+  template:
+    metadata:
+      labels:
+        app: canara-app
+    spec:
+      containers:
+      - name: canara
+        image: mvpar/canara:1.0.2
+        ports:
+        - containerPort: 8080
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: canara-app
+  name: svc
+spec:
+  ports:
+  - port: 8080
+    nodePort: 30001
+    protocol: TCP
+  type: NodePort
