@@ -29,17 +29,17 @@ pipeline {
       steps {
         sshagent(['linux']) {
          sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39'
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39 docker run -d -p 8086:8080 --name mpr999 mvpar/canara:1.0.2'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39 docker run -d -p 8086:8080 --name mpr99 mvpar/canara:1.0.2'
         }
       }
     }  
-/*  stage('k8s deploy') {
+  stage('k8s deploy') {
       steps {
           withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', serverUrl: '') {
           sh 'kubectl apply -f deploy.yml'
           }
       }
-    } */
+    } 
   }
 }
 
