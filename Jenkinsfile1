@@ -29,7 +29,7 @@ pipeline {
       steps {
         sshagent(['linux']) {
          sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39'
-         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39 docker run -d -p 8086:8080 --name mpr99 mvpar/canara:1.0.2'
+         sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39 docker run -d -p 8086:8080 --name mpr9 mvpar/canara:1.0.2'
         }
       }
     }  
