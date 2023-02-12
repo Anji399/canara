@@ -25,14 +25,14 @@ pipeline {
         sh 'docker push mvpar/canara:1.0.2'
       }    
     }
-  stage('Deploy docker-app on host') {
+/*  stage('Deploy docker-app on host') {
       steps {
         sshagent(['linux']) {
          sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39'
          sh 'ssh -o StrictHostKeyChecking=no ubuntu@172.31.59.39 docker run -d -p 8086:8080 --name mpr9 mvpar/canara:1.0.2'
         }
       }
-    }  
+    } */  
   stage('k8s deploy') {
       steps {
           withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
