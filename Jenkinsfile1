@@ -35,11 +35,10 @@ pipeline {
     } */  
   stage('k8s deploy') {
       steps {
-        withCredentials([<object of type com.cloudbees.jenkins.plugins.awscredentials.AmazonWebServicesCredentialsBinding>]) {
           withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', restrictKubeConfigAccess: false, serverUrl: '') {
           sh 'kubectl apply -f deploy.yml'
           }
-        }  
+         
       }
     } 
   }
