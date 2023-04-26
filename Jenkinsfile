@@ -14,7 +14,7 @@ pipeline {
     }
     stage("Build image") {
       steps {
-          sh 'docker build -t 786770494633.dkr.ecr.ap-south-1.amazonaws.com/atm .'
+          sh 'docker build -t 833858706932.dkr.ecr.ap-south-1.amazonaws.com/atm .'
       }
     }   
   }
