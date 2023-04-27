@@ -14,7 +14,7 @@ pipeline {
     }
     stage("Build image") {
       steps {
-          sh 'docker build -t 833858706932.dkr.ecr.ap-south-1.amazonaws.com/my-app .'
+          sh 'docker build -t 833858706932.dkr.ecr.ap-south-1.amazonaws.com/my-app:latest .'
       }
     }
      stage('push image') {
