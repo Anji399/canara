@@ -19,6 +19,7 @@ pipeline {
     }
     stage('push image') {
       steps {
+          sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 833858706932.dkr.ecr.us-east-1.amazonaws.com"
           sh "docker tag canara:latest 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
           sh "docker push 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
       }    
