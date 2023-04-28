@@ -23,7 +23,14 @@ pipeline {
           sh "docker tag canara:latest 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
           sh "docker push 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
       }    
-    }   
+    }
+    stage('k8s deploy') {
+      steps {
+          withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', serverUrl: '') {
+          sh 'kubectl apply -f deploy.yml'
+          }
+      }
+    }    
   }
 }    
         
