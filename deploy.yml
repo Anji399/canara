@@ -1,1 +1,35 @@
-
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app: mpr-app
+  name: mpr-app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: mpr-app
+  template:
+    metadata:
+      labels:
+        app: mpr-app
+    spec:
+      containers:
+      - name: mpr
+        image: 833858706932.dkr.ecr.us-east-1.amazonaws.com/mpr:latest
+        ports:
+        - containerPort: 80
+# service type loadbalancer       
+---
+apiVersion: v1
+kind: Service
+metadata:
+  labels:
+    app: mpr-app
+  name: svc
+spec:
+  ports:
+  - port: 80
+    nodePort: 30001
+    protocol: TCP
+  type: NodePort
