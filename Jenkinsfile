@@ -23,6 +23,13 @@ pipeline {
           sh "docker tag mpr:latest 833858706932.dkr.ecr.us-east-1.amazonaws.com/mpr:latest"
           sh "docker push 833858706932.dkr.ecr.us-east-1.amazonaws.com/mpr:latest"
       }    
+    }
+    stage('k8s deploy') {
+      steps {
+          withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', serverUrl: '') {
+          sh 'kubectl apply -f deploy.yml'
+          }
+      }
     }    
   }
 }    
