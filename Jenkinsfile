@@ -14,22 +14,15 @@ pipeline {
     }
     stage("Build image") {
       steps {
-          sh 'docker build -t canara .'
+          sh 'docker build -t mpr .'
       }
     }
     stage('push image') {
       steps {
           sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 833858706932.dkr.ecr.us-east-1.amazonaws.com"
-          sh "docker tag canara:latest 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
-          sh "docker push 833858706932.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
+          sh "docker tag mpr:latest 833858706932.dkr.ecr.us-east-1.amazonaws.com/mpr:latest"
+          sh "docker push 833858706932.dkr.ecr.us-east-1.amazonaws.com/mpr:latest"
       }    
-    }
-    stage('k8s deploy') {
-      steps {
-          withKubeConfig(caCertificate: '', clusterName: '', contextName: '', credentialsId: 'k8s', namespace: '', serverUrl: '') {
-          sh 'kubectl apply -f deploy.yml'
-          }
-      }
     }    
   }
 }    
