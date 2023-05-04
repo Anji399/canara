@@ -30,5 +30,6 @@ metadata:
 spec:
   ports:
   - port: 8080
-    targetPort: 30001
-  type: LoadBalancer
+    nodePort: 30001
+    protocol: TCP
+  type: NodePort
