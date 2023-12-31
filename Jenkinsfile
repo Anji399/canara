@@ -19,9 +19,9 @@ pipeline {
     }
     stage('push image') {
       steps {
-          sh "aws ecr get-login-password --region us-east-1 | docker login --username AWS --password-stdin 378032438507.dkr.ecr.us-east-1.amazonaws.com"
-          sh "docker tag canara:latest 378032438507.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
-          sh "docker push 378032438507.dkr.ecr.us-east-1.amazonaws.com/canara:latest"
+          sh "aws ecr get-login-password --region ap-south-1 | docker login --username AWS --password-stdin 714244395551.dkr.ecr.ap-south-1.amazonaws.com"
+          sh "docker tag canara:latest 714244395551.dkr.ecr.ap-south-1.amazonaws.com/canara:latest"
+          sh "docker push 714244395551.dkr.ecr.ap-south-1.amazonaws.com/canara:latest"
       }    
     }
     stage('k8s deploy') {
