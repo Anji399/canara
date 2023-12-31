@@ -1,35 +1,38 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  labels:
-    app: mpr-app
-  name: mpr-app
+  name: my-canara-deployment
 spec:
-  replicas: 1
+  replicas: 2
   selector:
     matchLabels:
-      app: mpr-app
+      app: canara-app
   template:
     metadata:
       labels:
-        app: mpr-app
+        app: canara-app
     spec:
       containers:
-      - name: mpr
-        image: 714244395551.dkr.ecr.ap-south-1.amazonaws.com/canara:latest
+      - name: canara-app
+        image: 714244395551.dkr.ecr.ap-south-1.amazonaws.com/canara
+        imagePullPolicy: Always
         ports:
-        - containerPort: 80
+        - containerPort: 8080
 # service type loadbalancer       
 ---
 apiVersion: v1
 kind: Service
 metadata:
   labels:
-    app: mpr-app
-  name: svc
+    app: canara-app
+    k8s-app: canara-app
+  name: canara-app
 spec:
   ports:
-  - port: 8080
-    nodePort: 30001
+  - name: http
+    port: 8080
     protocol: TCP
-  type: NodePort
+    targetPort: 8085
+  type: LoadBalancer
+  selector:
+    app: springboot-app
