@@ -16,7 +16,7 @@ spec:
     spec:
       containers:
       - name: mpr
-        image: 378032438507.dkr.ecr.us-east-1.amazonaws.com/canara:latest
+        image: 714244395551.dkr.ecr.ap-south-1.amazonaws.com/canara:latest
         ports:
         - containerPort: 80
 # service type loadbalancer       
